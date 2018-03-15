@@ -5,4 +5,15 @@ package com.lorusso.luca.smartshoplist;
  */
 
 public class Category {
+    private int idCategory;
+    private String name;
+
+    public Category(){
+
+    }
+    public Category(int idCategory, String name) {
+        this.idCategory = idCategory;
+        this.name = name;
+    }
+
 }

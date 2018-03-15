@@ -32,14 +32,17 @@
         android:layout_marginBottom="15sp"
         android:layout_marginEnd="15sp"
         android:layout_marginRight="15sp"
-        android:backgroundTint="@color/colorSecondary"
+        app:backgroundTint="@color/colorSecondary"
         app:srcCompat="@drawable/ic_android_add_24dp"
         tools:ignore="VectorDrawableCompat" />
 
-    <android.support.v7.widget.RecyclerView
+    <RelativeLayout
+        android:id="@+id/recyclerProdotti"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appBarLayout"
-        />
+        android:layout_below="@+id/appBarLayout">
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
