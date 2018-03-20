@@ -9,15 +9,14 @@ import java.util.ArrayList;
 public class Category {
     private int idCategory;
     private String name;
-    private ArrayList<Product> p;
+
 
     public Category(){
 
     }
-    public Category(int idCategory, String name, ArrayList<Product> p) {
+    public Category(int idCategory, String name) {
         this.idCategory = idCategory;
         this.name = name;
-        this.p = p;
     }
 
     public int getIdCategory() {
@@ -36,11 +35,4 @@ public class Category {
         this.name = name;
     }
 
-    public ArrayList<Product> getP() {
-        return p;
-    }
-
-    public void setP(ArrayList<Product> p) {
-        this.p = p;
-    }
 }

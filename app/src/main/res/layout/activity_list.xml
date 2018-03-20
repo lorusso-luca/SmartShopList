@@ -36,13 +36,11 @@
         app:srcCompat="@drawable/ic_android_add_24dp"
         tools:ignore="VectorDrawableCompat" />
 
-    <RelativeLayout
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerProdotti"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appBarLayout">
-
-    </RelativeLayout>
+        android:layout_below="@+id/appBarLayout" />
 
 
 </RelativeLayout>

@@ -11,19 +11,17 @@ public class Product {
     private String description;
     private int quantity;
 
+    private Category category;
 
-
-
-
-    public Product(){
-
+    public Product() {
     }
 
-    public Product(int id, String name, String description, int quantity) {
+    public Product(int id, String name, String description, int quantity, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.quantity = quantity;
+        this.category = category;
     }
 
     public int getId() {
@@ -56,5 +54,13 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
