@@ -1,6 +1,6 @@
 package com.lorusso.luca.smartshoplist;
 
-import android.annotation.SuppressLint;
+import android.content.pm.InstrumentationInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +19,7 @@ public class ListActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Product> prodList = new ArrayList<>();
+    private DBproductHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,15 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //    DBproduct db = new DBproduct(this);
+        if (db == null) {
+            db = new DBproductHelper(this);
+        }
+        String name = db.getDatabaseName();
+        int c = db.getDatabaseVersion();
+
+        db.insertProduct("pasta");
+        db.insertCategory("alimentari");
+
 
         RecyclerView recyclerViewProdotti = findViewById(R.id.recyclerProdotti);
         recyclerViewProdotti.setHasFixedSize(true);
@@ -57,6 +67,33 @@ public class ListActivity extends AppCompatActivity {
         prodList.add(p);
         p = new Product(2, "cereali", "integrali", 3, c);
         prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+        p = new Product(2, "cereali", "integrali", 3, c);
+        prodList.add(p);
+
     }
 
     @Override

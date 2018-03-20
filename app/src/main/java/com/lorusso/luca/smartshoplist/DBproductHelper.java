@@ -29,19 +29,26 @@ public class DBproductHelper extends SQLiteOpenHelper {
 
 
     public static final String CREATE_PRODUCT_TABLE =
-            "CREATE TABLE " + PRODUCT_TABLE + "("
-                    + PRODUCT_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "CREATE TABLE " + PRODUCT_TABLE + " ("
+                    + PRODUCT_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + PRODUCT_COLUMN_NAME + " TEXT,"
-                    + PRODUCT_COLUMN_QUANTITY + " INTEGER"
-                    + PRODUCT_COLUMN_DESCRIPTION + " TEXT"
-                    + "FOREIGN KEY(" + PRODUCT_COLUMN_CATEGORY + ") REFERENCES " + CATEGORY_TABLE + "(idCategory) "
-                    + ")";
-
+                    + PRODUCT_COLUMN_QUANTITY + " INTEGER, "
+                    + PRODUCT_COLUMN_DESCRIPTION + " TEXT, "
+                    + PRODUCT_COLUMN_CATEGORY + " INTEGER, "
+                    + "FOREIGN KEY(" + PRODUCT_COLUMN_CATEGORY + ") REFERENCES " + CATEGORY_TABLE + "(" + CATEGORY_COLUMN_ID + ")"
+                    + ");";
+    /* private static final String TASK_TABLE_CREATE = "create table "
+             + TASK_TABLE + " (" + TASK_ID
+             + " integer primary key autoincrement, " + TASK_TITLE
+             + " text not null, " + TASK_NOTES + " text not null, "
+             + TASK_CAT + " integer,"
+             + " FOREIGN KEY ("+TASK_CAT+") REFERENCES "+CAT_TABLE+" ("+CAT_ID+"), "
+             + TASK_DATE_TIME + " text not null);";*/
     public static final String CREATE_CATEGORY_TABLE =
             "CREATE TABLE " + CATEGORY_TABLE + "("
-                    + CATEGORY_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + CATEGORY_COLUMN_NAME + " TEXT,"
-                    + ")";
+                    + CATEGORY_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + CATEGORY_COLUMN_NAME + " TEXT"
+                    + ");";
 
     public static DBproductHelper instance;
 
@@ -50,7 +57,8 @@ public class DBproductHelper extends SQLiteOpenHelper {
             instance = new DBproductHelper(context);
         return instance;
     }
-    private DBproductHelper(Context context) {
+
+    public DBproductHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -58,8 +66,9 @@ public class DBproductHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
-        db.execSQL(CREATE_PRODUCT_TABLE);
         db.execSQL(CREATE_CATEGORY_TABLE);
+        db.execSQL(CREATE_PRODUCT_TABLE);
+
     }
 
     @Override
@@ -70,7 +79,11 @@ public class DBproductHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertNote(String p) {
+    public static int getDatabaseVersion() {
+        return DATABASE_VERSION;
+    }
+
+    public long insertProduct(String p) {
         // get writable database as we want to write data
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -78,14 +91,33 @@ public class DBproductHelper extends SQLiteOpenHelper {
         // `id` and `timestamp` will be inserted automatically.
         // no need to add them
         //TODO FIX THIS
-        //values.put(PRODUCT_TABLE, note);
+        values.put(PRODUCT_COLUMN_NAME, p);
         // insert row
-        //long id = db.insert(Product.TABLE_NAME, null, values);
+        long id = db.insert(PRODUCT_TABLE, null, values);
 
         // close db connection
         db.close();
 
         // return newly inserted row id
-       // return id;
+        return id;
+    }
+
+    public long insertCategory(String c) {
+        // get writable database as we want to write data
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        // `id` and `timestamp` will be inserted automatically.
+        // no need to add them
+
+        values.put(CATEGORY_COLUMN_NAME, c);
+        // insert row
+        long id = db.insert(CATEGORY_TABLE, null, values);
+
+        // close db connection
+        db.close();
+
+        // return newly inserted row id
+        return id;
     }
 }
