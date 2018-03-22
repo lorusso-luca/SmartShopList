@@ -1,6 +1,7 @@
 package com.lorusso.luca.smartshoplist;
 
 import android.content.pm.InstrumentationInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,7 @@ public class ListActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Product> prodList = new ArrayList<>();
     private DBproductHelper db;
+    private Product prova;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +34,16 @@ public class ListActivity extends AppCompatActivity {
         if (db == null) {
             db = new DBproductHelper(this);
         }
-        String name = db.getDatabaseName();
-        int c = db.getDatabaseVersion();
 
-        db.insertProduct("pasta");
         db.insertCategory("alimentari");
+        db.insertCategory("vestiti");
+
+        db.insertProduct("pasta", 1);
+        db.insertProduct("pollo", 2);
+        db.insertProduct("carote", 2);
+
+
+        prova = db.getProductByName("carote");
 
 
         RecyclerView recyclerViewProdotti = findViewById(R.id.recyclerProdotti);
@@ -64,7 +71,8 @@ public class ListActivity extends AppCompatActivity {
     public void listOfProduct() {
         Category c = new Category(1, "colazione");
         Product p = new Product(1, "biscotti", "integrali", 3, c);
-        prodList.add(p);
+        prodList.add(prova);
+
         p = new Product(2, "cereali", "integrali", 3, c);
         prodList.add(p);
         p = new Product(2, "cereali", "integrali", 3, c);

@@ -13,8 +13,6 @@ public class Product {
 
     private Category category;
 
-    public Product() {
-    }
 
     public Product(int id, String name, String description, int quantity, Category category) {
         this.id = id;
